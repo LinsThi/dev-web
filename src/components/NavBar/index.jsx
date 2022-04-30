@@ -5,13 +5,13 @@ import { Routes, Route, Link } from "react-router-dom";
 import About from "../Atv-01/About";
 import Home from "../Atv-01/Home";
 
-import CreateStudent from "../Atv-02/Crud/Student/CreateStudent";
-import ListStudent from "../Atv-02/Crud/Student/ListStudent";
-import EditStudent from "../Atv-02/Crud/Student/EditStudent";
+import CreateStudent from "../Atv-03/Crud/Student/CreateStudent";
+import ListStudent from "../Atv-03/Crud/Student/ListStudent";
+import EditStudent from "../Atv-03/Crud/Student/EditStudent";
 
-import CreateTeacher from "../Atv-02/Crud/Teacher/CreateTeacher";
-import ListTeacher from "../Atv-02/Crud/Teacher/ListTeacher";
-import EditTeacher from "../Atv-02/Crud/Teacher/EditTeacher";
+import CreateTeacher from "../Atv-03/Crud/Teacher/CreateTeacher";
+import ListTeacher from "../Atv-03/Crud/Teacher/ListTeacher";
+import EditTeacher from "../Atv-03/Crud/Teacher/EditTeacher";
 
 export default function NavBar() {
   return (
