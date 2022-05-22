@@ -16,7 +16,6 @@ const CreateStudent = () => {
     axios
       .post("http://localhost:3002/crud/student/create", newStudent)
       .then((response) => {
-        console.log(response.data);
         alert(`Student ${name} created successfully.`);
         navigate("/listStudent");
       })

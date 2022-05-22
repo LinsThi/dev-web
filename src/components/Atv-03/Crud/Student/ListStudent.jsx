@@ -29,7 +29,7 @@ const ListStudent = () => {
           <th>IRA</th>
           <th colSpan="2"></th>
         </thead>
-        <tbody>{generateTable}</tbody>
+        <tbody>{generateTable()}</tbody>
       </table>
     </div>
   );

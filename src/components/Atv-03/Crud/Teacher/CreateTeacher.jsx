@@ -16,7 +16,6 @@ const CreateTeacher = () => {
     axios
       .post("http://localhost:3002/crud/teacher/create", newTeacher)
       .then((response) => {
-        console.log(response.data);
         alert(`Teacher ${name} created successfully.`);
         navigate("/listTeacher");
       })
