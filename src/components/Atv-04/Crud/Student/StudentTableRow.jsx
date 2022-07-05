@@ -16,8 +16,7 @@ const StudentTableRow = (props) => {
   }, [_id, name]);
 
   return (
-    <div>
-      <Toaster />
+    <>
       <tr>
         <td>{_id}</td>
         <td>{name}</td>
@@ -34,7 +33,8 @@ const StudentTableRow = (props) => {
           </button>
         </td>
       </tr>
-    </div>
+      <Toaster />
+    </>
   );
 };
 export default StudentTableRow;

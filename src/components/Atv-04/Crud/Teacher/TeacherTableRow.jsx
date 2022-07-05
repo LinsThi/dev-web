@@ -16,7 +16,7 @@ const TeacherTableRow = (props) => {
   }, [_id, name]);
 
   return (
-    <div>
+    <>
       <Toaster />
       <tr>
         <td>{_id}</td>
@@ -34,7 +34,7 @@ const TeacherTableRow = (props) => {
           </button>
         </td>
       </tr>
-    </div>
+    </>
   );
 };
 export default TeacherTableRow;

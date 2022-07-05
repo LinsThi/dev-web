@@ -9,5 +9,5 @@ export const PrivateRoutes = ({ children }) => {
 
 export const PrivateRouteWithoutLogin = () => {
   const { signed } = useAuth();
-  return signed ? <Navigate to="createStudent" /> : <Outlet />;
+  return signed ? <Navigate to="listStudent" /> : <Outlet />;
 };
