@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import ReactLoading from "react-loading";
 import { useCallback } from "react";
+import { Toaster, toast } from "react-hot-toast";
 
 function Home() {
   const [email, setEmail] = useState("");
@@ -10,18 +11,23 @@ function Home() {
   const [loading, setLoading] = useState(false);
   const { signIn } = useAuth();
 
+  const showToast = () => toast.error("PREENCHA TODOS OS CAMPOS.");
+
   const handleSubmit = useCallback(
     (event) => {
-      setLoading(true);
+      event.preventDefault();
+
+      if ((email !== "") & (password !== "")) {
+        setLoading(true);
+        login();
+      } else {
+        showToast();
+      }
 
       async function login() {
-        console.log("aaaa");
-        event.preventDefault();
         await signIn(email, password);
         setLoading(false);
       }
-
-      if ((email !== "") & (password !== "")) login();
     },
     [email, password, signIn]
   );
@@ -29,6 +35,9 @@ function Home() {
   return (
     <div className="content">
       <main style={{ width: "30%", margin: 100 }}>
+        <div>
+          <Toaster />
+        </div>
         <h2>Login Page</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FirebaseServiceStudent from "../../../../services/Student";
+import { Toaster, toast } from "react-hot-toast";
 
 const CreateStudent = () => {
   const [name, setName] = useState("");
@@ -8,18 +9,27 @@ const CreateStudent = () => {
   const [ira, setIra] = useState(0);
   const navigate = useNavigate();
 
+  const showToast = () => toast.error("PREENCHA TODOS OS CAMPOS.");
+  const successToast = (name) =>
+    toast.success("Student " + name + " created successfully");
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const newStudent = { name, course, ira };
-    FirebaseServiceStudent.createStudent(newStudent, () => {
-      alert(`Student ${name} created successfully.`);
-      navigate("/listStudent");
-    });
+    if ((name !== "") & (course !== "") & (ira !== 0)) {
+      const newStudent = { name, course, ira };
+      FirebaseServiceStudent.createStudent(newStudent, () => {
+        successToast(name);
+        navigate("/listStudent");
+      });
+    } else {
+      showToast();
+    }
   };
 
   return (
     <div>
+      <Toaster />
       <h2 style={{ textAlign: "center" }}>Create Student</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">

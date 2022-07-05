@@ -1,10 +1,10 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-export const PrivateRoutes = () => {
+export const PrivateRoutes = ({ children }) => {
   const { signed } = useAuth();
-  // console.log("signed is " + signed);
-  return signed ? <Outlet /> : <Navigate to="/" />;
+
+  return signed ? children : <Navigate to="/" />;
 };
 
 export const PrivateRouteWithoutLogin = () => {

@@ -102,7 +102,10 @@ export default function NavBar() {
               <button
                 style={{ marginLeft: 20 }}
                 className="btn btn-danger"
-                onClick={() => handleLogout()}
+                onClick={() => {
+                  setLoading(true);
+                  handleLogout();
+                }}
               >
                 Logout
               </button>
@@ -116,33 +119,68 @@ export default function NavBar() {
           <Route path="/" element={<Home />} />
         </Route>
 
-        <Route path="about" element={<PrivateRoutes />}>
-          <Route path="about" element={<About />} />
-        </Route>
+        <Route
+          path="about"
+          element={
+            <PrivateRoutes>
+              <About />
+            </PrivateRoutes>
+          }
+        />
 
-        <Route path="createStudent" element={<PrivateRoutes />}>
-          <Route path="createStudent" element={<CreateStudent />} />
-        </Route>
+        <Route
+          path="createStudent"
+          element={
+            <PrivateRoutes>
+              <CreateStudent />
+            </PrivateRoutes>
+          }
+        />
 
-        <Route path="listStudent" element={<PrivateRoutes />}>
-          <Route path="listStudent" element={<ListStudent />} />
-        </Route>
+        <Route
+          path="listStudent"
+          element={
+            <PrivateRoutes>
+              <ListStudent />
+            </PrivateRoutes>
+          }
+        />
 
-        <Route path="editStudent/:id" element={<PrivateRoutes />}>
-          <Route path="editStudent/:id" element={<EditStudent />} />
-        </Route>
+        <Route
+          path="editStudent/:id"
+          element={
+            <PrivateRoutes>
+              <EditStudent />
+            </PrivateRoutes>
+          }
+        />
 
-        <Route path="createTeacher" element={<PrivateRoutes />}>
-          <Route path="createTeacher" element={<CreateTeacher />} />
-        </Route>
+        <Route
+          path="createTeacher"
+          element={
+            <PrivateRoutes>
+              <CreateTeacher />
+            </PrivateRoutes>
+          }
+        />
 
-        <Route path="listTeacher" element={<PrivateRoutes />}>
-          <Route path="listTeacher" element={<ListTeacher />} />
-        </Route>
+        <Route
+          path="listTeacher"
+          element={
+            <PrivateRoutes>
+              <ListTeacher />
+            </PrivateRoutes>
+          }
+        />
 
-        <Route path="editTeacher/:id" element={<PrivateRoutes />}>
-          <Route path="editTeacher/:id" element={<EditTeacher />} />
-        </Route>
+        <Route
+          path="editTeacher/:id"
+          element={
+            <PrivateRoutes>
+              <EditTeacher />
+            </PrivateRoutes>
+          }
+        />
       </Routes>
     </div>
   );

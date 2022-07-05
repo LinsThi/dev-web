@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import FirebaseServiceTeacher from "../../../../services/Teacher";
+import { Toaster, toast } from "react-hot-toast";
 
 const EditTeacher = () => {
   const [name, setName] = useState("");
@@ -18,23 +19,32 @@ const EditTeacher = () => {
     }, params.id);
   }, [params.id]);
 
+  const showToast = () => toast.error("PREENCHA TODOS OS CAMPOS.");
+  const successToast = (name) =>
+    toast.success("Teacher " + name + " updated successfully");
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const updatedTeacher = { name, university, degree };
+    if ((name !== "") & (university !== "") & (degree !== "")) {
+      const updatedTeacher = { name, university, degree };
 
-    FirebaseServiceTeacher.updateTeacher(
-      () => {
-        alert(`Teacher ${name} updated successfully.`);
-        navigate("/listTeacher");
-      },
-      params.id,
-      updatedTeacher
-    );
+      FirebaseServiceTeacher.updateTeacher(
+        () => {
+          successToast(name);
+          navigate("/listTeacher");
+        },
+        params.id,
+        updatedTeacher
+      );
+    } else {
+      showToast();
+    }
   };
 
   return (
     <div>
+      <Toaster />
       <h2 style={{ textAlign: "center" }}>Edit Teacher</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
