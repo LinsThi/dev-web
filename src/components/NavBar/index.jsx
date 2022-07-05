@@ -1,9 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import * as React from "react";
+import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
+import ReactLoading from "react-loading";
 
 import About from "../Atv-01/About";
-import Home from "../Atv-01/Home";
+import Home from "../Atv-05/components/Home";
 
 import CreateStudent from "../Atv-04/Crud/Student/CreateStudent";
 import ListStudent from "../Atv-04/Crud/Student/ListStudent";
@@ -12,8 +13,13 @@ import EditStudent from "../Atv-04/Crud/Student/EditStudent";
 import CreateTeacher from "../Atv-04/Crud/Teacher/CreateTeacher";
 import ListTeacher from "../Atv-04/Crud/Teacher/ListTeacher";
 import EditTeacher from "../Atv-04/Crud/Teacher/EditTeacher";
+import { PrivateRoutes, PrivateRouteWithoutLogin } from "../Atv-05/routes";
+import { useAuth } from "../Atv-05/context/AuthContext";
+import { useState } from "react";
 
 export default function NavBar() {
+  const [loading, setLoading] = useState(false);
+  const { signed, handleLogout } = useAuth();
   return (
     <div className="container">
       <nav className="navbar navbar-expand-sm navbar-light bg-light">
@@ -85,19 +91,58 @@ export default function NavBar() {
             </li>
           </ul>
         </div>
+
+        {signed && (
+          <div>
+            Olá,{" "}
+            {JSON.parse(sessionStorage.getItem("@AuthFirebase:user")).email}
+            {loading ? (
+              <ReactLoading type="spin" color="blue" height={30} width={30} />
+            ) : (
+              <button
+                style={{ marginLeft: 20 }}
+                className="btn btn-danger"
+                onClick={() => handleLogout()}
+              >
+                Logout
+              </button>
+            )}
+          </div>
+        )}
       </nav>
 
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="about" element={<About />} />
+        <Route path="/" element={<PrivateRouteWithoutLogin />}>
+          <Route path="/" element={<Home />} />
+        </Route>
 
-        <Route path="createStudent" element={<CreateStudent />} />
-        <Route path="listStudent" element={<ListStudent />} />
-        <Route path="editStudent/:id" element={<EditStudent />} />
+        <Route path="about" element={<PrivateRoutes />}>
+          <Route path="about" element={<About />} />
+        </Route>
 
-        <Route path="createTeacher" element={<CreateTeacher />} />
-        <Route path="listTeacher" element={<ListTeacher />} />
-        <Route path="editTeacher/:id" element={<EditTeacher />} />
+        <Route path="createStudent" element={<PrivateRoutes />}>
+          <Route path="createStudent" element={<CreateStudent />} />
+        </Route>
+
+        <Route path="listStudent" element={<PrivateRoutes />}>
+          <Route path="listStudent" element={<ListStudent />} />
+        </Route>
+
+        <Route path="editStudent/:id" element={<PrivateRoutes />}>
+          <Route path="editStudent/:id" element={<EditStudent />} />
+        </Route>
+
+        <Route path="createTeacher" element={<PrivateRoutes />}>
+          <Route path="createTeacher" element={<CreateTeacher />} />
+        </Route>
+
+        <Route path="listTeacher" element={<PrivateRoutes />}>
+          <Route path="listTeacher" element={<ListTeacher />} />
+        </Route>
+
+        <Route path="editTeacher/:id" element={<PrivateRoutes />}>
+          <Route path="editTeacher/:id" element={<EditTeacher />} />
+        </Route>
       </Routes>
     </div>
   );
